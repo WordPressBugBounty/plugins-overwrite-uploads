@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * Copyright 2011 Ian Dunn (email : ian@iandunn.name)
  *
  * This program is free software; you can redistribute it and/or modify
@@ -67,6 +67,16 @@ class OverwriteUploads {
 		$existing_file = get_posts( $params );
 
 		if ( isset( $existing_file[0]->ID ) ) {
+			$author_id = (int) $existing_file[0]->post_author;
+
+			if ( get_current_user_id() !== $author_id ) {
+				$can_overwrite_others_posts = current_user_can( 'edit_others_posts' );
+
+				if ( ! apply_filters( 'ovup_can_overwrite_upload', $can_overwrite_others_posts, $existing_file[0] ) ) {
+					return $file;
+				}
+			}
+
 			wp_delete_attachment( $existing_file[0]->ID, true );
 		}
 

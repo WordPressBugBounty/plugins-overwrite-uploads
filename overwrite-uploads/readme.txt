@@ -3,8 +3,8 @@ Contributors:      iandunn
 Donate link:       https://kiva.org
 Tags:              overwrite, uploads, files, media library, unique, filename
 Requires at least: 2.9
-Tested up to:      5.6
-Stable tag:        1.2
+Tested up to:      6.8.2
+Stable tag:        1.2.2
 License:           GPLv2
 
 Overwrites files with the same name *and folder* when uploading, instead of storing multiple copies with unique filenames.
@@ -32,6 +32,8 @@ Once the plugin is installed and activated, it will start to work automatically.
 = Why do I see multiple copies of the file in the Media Library =
 WordPress allows files to have the same name if they're not in the same directory. So, `wp-content/uploads/2013/11/pizza.jpg` can live alongside `wp-content/uploads/2013/12/pizza.jpg`. This plugin only deletes existing files if they are in the same folder that the new file will be placed in.
 
+Also, only Editor and Administrator accounts can overwrite the uploads of other users. You can customize this behavior using the `ovup_can_overwrite_upload` filter.
+
 = Can I make a donation to support the plugin? =
 I do this as a way to give back to the WordPress community, so I don't want to take any donations, but if you'd like to give something I'd encourage you to make a microloan with [Kiva](http://www.kiva.org).
 
@@ -40,6 +42,9 @@ I'm happy to fix reproducible bugs, but I don't have time to help you customize 
 
 
 == Changelog ==
+
+= 1.2 (2017-04-01) =
+* [SECURITY] Fix a bug where Author accounts could overwrite media created by editors and administrators. If desired, the previous behavior can be restored using the `ovup_can_overwrite_upload` filter. Props [phycox69](https://hackerone.com/phycox69).
 
 = 1.2 (2017-04-01) =
 * [NEW] Added support for sideloaded images (typically done by plugins), in addition to regular manual uploads. Props wayneallen-1
